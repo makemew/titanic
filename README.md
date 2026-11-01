@@ -24,7 +24,7 @@ This learning project is based on the [Kaggle Titanic competition](https://www.k
 | Logistic Regression | 0.799 | 0.80 |
 | Random Forest | 0.802 | 0.81 |
 
-The data is split 70% for training and 30% for validation, stratified by survival, with `random_state=42`. After comparison, the random forest is trained on all of `train.csv` and produces predictions for the 418 rows in `test.csv`. The notebook does not report a Kaggle leaderboard score.
+The data is split 70% for training and 30% for validation, stratified by survival, with `random_state=42`. After comparison, the random forest is trained on all of `train.csv` and produces predictions for the 418 rows in `test.csv`.  The generated `submission.csv` received a Kaggle submission score of **0.75598**.
 
 ## Limitations
 
