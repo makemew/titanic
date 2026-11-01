@@ -1,12 +1,12 @@
-# Titanic: прогноз выживания
+# Titanic Survival Prediction
 
-Учебный проект по [конкурсу Kaggle Titanic](https://www.kaggle.com/competitions/titanic). Ноутбук [`Titanic.ipynb`](Titanic.ipynb) содержит предобработку данных через `Pipeline` и `ColumnTransformer`, сравнение `LogisticRegression` и `RandomForestClassifier`, проверку на отложенной выборке и пяти блоках кроссвалидации. В конце создаётся `submission.csv`.
+This learning project is based on the [Kaggle Titanic competition](https://www.kaggle.com/competitions/titanic). [`Titanic.ipynb`](Titanic.ipynb) prepares features with `Pipeline` and `ColumnTransformer`, compares `LogisticRegression` and `RandomForestClassifier`, evaluates both models on a holdout set and with five-fold cross-validation, and generates `submission.csv`.
 
-## Запуск
+## Setup
 
-1. Скачайте `train.csv` и `test.csv` со [страницы данных конкурса](https://www.kaggle.com/competitions/titanic/data). Для скачивания может потребоваться вход в Kaggle и принятие правил конкурса.
-2. Поместите оба CSV-файла в эту папку рядом с `Titanic.ipynb`.
-3. Из этой папки выполните:
+1. Download `train.csv` and `test.csv` from the [competition data page](https://www.kaggle.com/competitions/titanic/data). You may need to sign in and accept the competition rules.
+2. Put both files next to `Titanic.ipynb` in this folder.
+3. Run the following commands from this folder:
 
    ```bash
    python -m venv .venv
@@ -15,20 +15,20 @@
    jupyter lab Titanic.ipynb
    ```
 
-4. Запустите ячейки по порядку. Ноутбук читает файлы относительно текущей папки и записывает `submission.csv` туда же. На Windows вместо `source .venv/bin/activate` используйте `.venv\Scripts\activate`.
+4. Run the cells in order. The notebook reads CSV files from the current folder and writes `submission.csv` there. On Windows, activate the environment with `.venv\Scripts\activate` instead.
 
-## Результаты из сохранённого запуска
+## Results from the saved run
 
-| Модель | Accuracy на отложенной выборке | Средняя accuracy, 5-fold CV на обучающей части |
+| Model | Holdout accuracy | Mean five-fold CV accuracy on the training split |
 | --- | ---: | ---: |
-| Logistic Regression | 0,799 | 0,80 |
-| Random Forest | 0,802 | 0,81 |
+| Logistic Regression | 0.799 | 0.80 |
+| Random Forest | 0.802 | 0.81 |
 
-Разделение: 70% для обучения и 30% для проверки, `random_state=42`, стратификация по целевому классу. После сравнения случайный лес обучается на полном `train.csv` и предсказывает 418 строк `test.csv`. Результат на Kaggle leaderboard в ноутбуке не указан.
+The data is split 70% for training and 30% for validation, stratified by survival, with `random_state=42`. After comparison, the random forest is trained on all of `train.csv` and produces predictions for the 418 rows in `test.csv`. The notebook does not report a Kaggle leaderboard score.
 
-## Ограничения исследования
+## Limitations
 
-- Ноутбук хранит результаты прежнего запуска. Повторный запуск может дать иные числа при другой версии библиотек.
-- Выбор модели и оценка выполнены на одном наборе данных. Отдельного независимого теста с известными метками нет.
-- В тексте ноутбука есть устаревшие заметки и неточности: например, упоминание пропусков в `Cabin` при том, что этот столбец не используется моделью. Точные метрики приведены выше по выводам ячеек.
-- Анализ влияния признаков является исследовательским; коэффициенты и важности модели сами по себе не доказывают причинность.
+- The notebook includes outputs from an earlier run. Results can vary with different library versions.
+- Model selection and evaluation use the same provided training dataset. There is no separate labeled test set.
+- Some narrative notes in the notebook are outdated or imprecise. For example, they mention missing values in `Cabin`, although the model does not use that column. The metrics above come from the code outputs.
+- Feature coefficients and importance values are exploratory; they do not establish causation.
