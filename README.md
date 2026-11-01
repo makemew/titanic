@@ -1,2 +1,34 @@
-# titanic
-Titanic survival prediction with scikit-learn: preprocessing, model comparison, cross-validation, and Kaggle submission.
+# Titanic: прогноз выживания
+
+Учебный проект по [конкурсу Kaggle Titanic](https://www.kaggle.com/competitions/titanic). Ноутбук [`Titanic.ipynb`](Titanic.ipynb) содержит предобработку данных через `Pipeline` и `ColumnTransformer`, сравнение `LogisticRegression` и `RandomForestClassifier`, проверку на отложенной выборке и пяти блоках кроссвалидации. В конце создаётся `submission.csv`.
+
+## Запуск
+
+1. Скачайте `train.csv` и `test.csv` со [страницы данных конкурса](https://www.kaggle.com/competitions/titanic/data). Для скачивания может потребоваться вход в Kaggle и принятие правил конкурса.
+2. Поместите оба CSV-файла в эту папку рядом с `Titanic.ipynb`.
+3. Из этой папки выполните:
+
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate
+   python -m pip install -r requirements.txt
+   jupyter lab Titanic.ipynb
+   ```
+
+4. Запустите ячейки по порядку. Ноутбук читает файлы относительно текущей папки и записывает `submission.csv` туда же. На Windows вместо `source .venv/bin/activate` используйте `.venv\Scripts\activate`.
+
+## Результаты из сохранённого запуска
+
+| Модель | Accuracy на отложенной выборке | Средняя accuracy, 5-fold CV на обучающей части |
+| --- | ---: | ---: |
+| Logistic Regression | 0,799 | 0,80 |
+| Random Forest | 0,802 | 0,81 |
+
+Разделение: 70% для обучения и 30% для проверки, `random_state=42`, стратификация по целевому классу. После сравнения случайный лес обучается на полном `train.csv` и предсказывает 418 строк `test.csv`. Результат на Kaggle leaderboard в ноутбуке не указан.
+
+## Ограничения исследования
+
+- Ноутбук хранит результаты прежнего запуска. Повторный запуск может дать иные числа при другой версии библиотек.
+- Выбор модели и оценка выполнены на одном наборе данных. Отдельного независимого теста с известными метками нет.
+- В тексте ноутбука есть устаревшие заметки и неточности: например, упоминание пропусков в `Cabin` при том, что этот столбец не используется моделью. Точные метрики приведены выше по выводам ячеек.
+- Анализ влияния признаков является исследовательским; коэффициенты и важности модели сами по себе не доказывают причинность.
